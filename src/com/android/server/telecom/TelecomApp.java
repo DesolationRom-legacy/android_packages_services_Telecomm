@@ -39,12 +39,6 @@ public final class TelecomApp extends Application {
     private MissedCallNotifier mMissedCallNotifier;
 
     /**
-     * Blacklist call notifier. Exists here so that the instance can be shared with
-     * {@link TelecomBroadcastReceiver}.
-     */
-    private BlacklistCallNotifier mBlacklistCallNotifier;
-
-    /**
      * Maintains the list of registered {@link android.telecom.PhoneAccountHandle}s.
      */
     private PhoneAccountRegistrar mPhoneAccountRegistrar;
@@ -65,11 +59,9 @@ public final class TelecomApp extends Application {
             // to run in the system service. The emphasis is on ensuring that initialization of all
             // telecom classes happens in one place without relying on Singleton initialization.
             mMissedCallNotifier = new MissedCallNotifier(this);
-            mBlacklistCallNotifier = new BlacklistCallNotifier(this);
             mPhoneAccountRegistrar = new PhoneAccountRegistrar(this);
 
-            mCallsManager = new CallsManager(this, mMissedCallNotifier,
-                    mBlacklistCallNotifier, mPhoneAccountRegistrar);
+            mCallsManager = new CallsManager(this, mMissedCallNotifier, mPhoneAccountRegistrar);
             CallsManager.initialize(mCallsManager);
 
             mTelecomService = new TelecomServiceImpl(mMissedCallNotifier, mPhoneAccountRegistrar,
