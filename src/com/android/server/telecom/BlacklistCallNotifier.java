@@ -107,7 +107,7 @@ class BlacklistCallNotifier extends CallsManagerListenerBase {
         // Get the intent to open Blacklist settings if user taps on content ready
         Intent intent = new Intent(Intent.ACTION_MAIN);
         intent.setClassName("com.android.settings",
-                "com.android.settings.blacklist.BlacklistSettings");
+                "com.android.settings.Settings$BlacklistSettingsActivity");
         PendingIntent blSettingsIntent = PendingIntent.getActivity(mContext, 0, intent, 0);
 
         // Start building the notification
